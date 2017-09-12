@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        .menu-container {
+            width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .button {
+            position: absolute;
+            font-size: 2rem;
+            border-radius: 50%;
+            background-color: #094974;
+            width: 4rem;
+            height: 4rem;
+            text-align: center;
+            line-height: 4rem;
+            color: white;
+            border: 2px solid #094974;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: white;
+            color: #094974;
+            border: 2px solid #094974;
+        }
+
+        .button.menu-main {
+            left: calc(50% - 2rem);
+            z-index: 1;
+        }
+
+        .menu-sub-container .button {
+            z-index: 0;
+            left: calc(50% - 2rem);
+            top: 0;
+            transition: all .8s ease; 
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="menu-container">
+        <div class="button menu-main"><i class="fa fa-bars" aria-hidden="true"></i></div>
+        <div class="menu-sub-container" data-state="min">
+            <div class="button"><i class="fa fa-address-book-o" aria-hidden="true"></i></div>
+            <div class="button menu-sub2"><i class="fa fa-cog" aria-hidden="true"></i></div>
+            <div class="button menu-sub3"><i class="fa fa-file-o" aria-hidden="true"></i></div>
+            <div class="button menu-sub4"><i class="fa fa-home" aria-hidden="true"></i></div>
+            <div class="button menu-sub5"><i class="fa fa-ambulance" aria-hidden="true"></i></div>
+        </div>        
+    </div>  
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let main = document.querySelector(".menu-main");
+            let trans = [
+                {
+                    top: "2em",
+                    left: "calc(25% - 2rem)"
+                },
+                {
+                    top: "2em",
+                    left: "calc(75% - 2rem)"
+                },
+                {
+                    top: "4em",
+                    left: "calc(35% - 2rem)"
+                },
+                {
+                    top: "4em",
+                    left: "calc(65% - 2rem)"
+                },
+                {
+                    top: "5em",
+                    left: "calc(50% - 2rem)"
+                }
+            ];
+
+            main.addEventListener("click", function() {
+                let subcontainer = document.querySelector(".menu-sub-container");
+                let subs = subcontainer.querySelectorAll(".button");
+                if (subcontainer.getAttribute("data-state") === "min") {
+                    subs.forEach(function(v, i) {
+                        subs[i].style.left = trans[i].left;
+                        subs[i].style.top = trans[i].top;
+                    });
+                    subcontainer.setAttribute("data-state", "max");
+                } else {
+                    subs.forEach(function(v, i) {
+                        subs[i].style.left = "calc(50% - 2rem)";
+                        subs[i].style.top = "0";
+                    });
+                    subcontainer.setAttribute("data-state", "min");
+                }
+                
+            });
+        });
+    </script>
+
+</body>
+</html>
