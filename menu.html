@@ -43,6 +43,7 @@
             left: calc(50% - 2rem);
             top: 0;
             transition: all .8s ease; 
+            opacity: 0;
         }
     </style>
     
@@ -92,12 +93,14 @@
                     subs.forEach(function(v, i) {
                         subs[i].style.left = trans[i].left;
                         subs[i].style.top = trans[i].top;
+                        subs[i].style.opacity = 1;
                     });
                     subcontainer.setAttribute("data-state", "max");
                 } else {
                     subs.forEach(function(v, i) {
                         subs[i].style.left = "calc(50% - 2rem)";
                         subs[i].style.top = "0";
+                        subs[i].style.opacity = 0;
                     });
                     subcontainer.setAttribute("data-state", "min");
                 }
